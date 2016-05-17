@@ -1,0 +1,275 @@
+﻿
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "修改个人信息";
+}
+@model ZKH.Blog.Model.AdminInfoExt
+
+<style type="text/css">
+    label.error {
+        color: red;
+        display: inline;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+</style>
+<script src="~/Scripts/MyAjaxForm.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.validator.addMethod("password", function (value, element) {
+            var tel = /^[\A-Za-z0-9\!\#\$\%\^\&\*\.\~]{5,22}$/;
+            return this.optional(element) || (tel.test(value));
+        }, "密码不匹配");
+
+        $.validator.addMethod("mobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "手机号码格式错误");
+
+        $.validator.addMethod("qq", function (value, element) {
+            var tel = /^[1-9]\d{4,9}$/;
+            return this.optional(element) || (tel.test(value));
+        }, "qq号码格式错误");
+
+        $("form").validate({
+            rules: {
+                Name: { required: true },
+                UName: { required: true },
+                Country: { required: true },
+                BeAware: { required: true },
+                City: { required: true },
+                Folk: { required: true },
+                Kultur: { required: true },
+                Business: { required: true },
+                School: { required: true },
+                Speciality: { required: true },
+                Email: { required: true, email: true },
+                Phone: { required: true, mobile: true },
+                QQ: { required: true, qq: true }
+            },
+            messages: {
+                Name: { required: "*必填" },
+                UName: { required: "*必填" },
+                Country: { required: "*必填" },
+                BeAware: { required: "*必填" },
+                City: { required: "*必填" },
+                Folk: { required: "*必填" },
+                Kultur: { required: "*必填" },
+                Business: { required: "*必填" },
+                School: { required: "*必填" },
+                Speciality: { required: "*必填" },
+                Email: { required: "*必填", email: "邮箱格式错误" },
+                Phone: { required: "*必填", mobile: "手机号码格式错误" },
+                QQ: { required: "*必填", qq: "QQ号码格式错误" }
+            },
+            errorPlacement: function (error, element) {
+                error.appendTo(element.parent().parent());
+            }
+        });
+    });
+</script>
+
+<div class="container padding20 bg-white" style="margin-left:50px;padding-right:300px">
+    <p><h1 style="font-weight:300">修改个人信息</h1></p><br />
+    @using (Html.BeginForm("Index", "AdminPerMsg", FormMethod.Post, new { @autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="SubTime" value="@Model.SubTime" />
+        <input type="hidden" name="DelFlag" value="@Model.DelFlag" />
+        <input type="hidden" name="AdminInfoId" value="@Model.AdminInfoId" />
+        <div class="grid">
+            <div class="row">
+                <div class="cell">
+                    <label>姓名</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Name)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>用户名</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" name="UName" value="@ViewBag.UName">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row cells3">
+                <div class="cell">
+                    <label>国家/地区</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Country)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Country)
+                </div>
+                <div class="cell">
+                    <label>省份</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.BeAware)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.BeAware)
+                </div>
+                <div class="cell">
+                    <label>城市</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.City)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.City)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>民族</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Folk)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Folk)
+                </div>
+            </div>
+            <div class="row cells2">
+                <div class="cell">
+                    <label style="margin-right:15px">性别</label>
+                    <label class="input-control radio">
+                        <input type="radio" name="Sex" value="男" checked>
+                        <span class="check"></span>
+                        <span class="caption">男</span>
+                    </label>
+                </div>
+                <div class="cell">
+                    <label class="input-control radio">
+                        <input type="radio" name="Sex" value="女">
+                        <span class="check"></span>
+                        <span class="caption">女</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>年龄</label><br />
+                    <div class="input-control select full-size">
+                        <select name="Age">
+                            <option selected="selected">1</option>
+                            @for (int i = 2; i < 101; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>文化程度</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Kultur)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Kultur)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>职务</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Business)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Business)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>毕业学校</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.School)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.School)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>主修专业</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Speciality)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Speciality)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>邮箱</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Email)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>手机</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Phone)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>QQ</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.QQ)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.QQ)
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>备注</label>
+                    <div class="input-control text full-size" data-role="input">
+                        @Html.EditorFor(model => model.Remark)
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <div class="padding20 no-padding-right no-padding-left no-padding-top">
+                        <input type="submit" value="完成" class="button info block-shadow-info text-shadow" />
+                        <input type="reset" value="重置" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+
+    function afterSubmit(data) {
+        var str = data.split(':');
+        alert(str[1]);
+        if (str[0] == "ok") {
+            gotomain();
+        }
+    }
+
+    function gotomain() {
+        window.location.href = "/Admin/Menu";
+    }
+
+</script>

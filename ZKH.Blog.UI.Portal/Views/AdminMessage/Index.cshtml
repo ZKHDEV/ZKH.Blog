@@ -1,0 +1,134 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "留言管理";
+}
+@using ZKH.Blog.Model
+
+<script src="~/Scripts/MyAjaxForm.js"></script>
+
+<div class="padding20 bg-white">
+    <h1 class="text-light">留言管理<span class="mif-file-text place-right"></span></h1>
+    <hr class="thin bg-grayLighter">
+    <button class="button success" onclick="update()"> 回复</button>
+    <button class="button alert" onclick="confirmdel()"> 删除</button>
+    <hr class="thin bg-grayLighter">
+    <table class="dataTable border bordered" data-role="datatable" data-auto-width="false">
+        <thead>
+            <tr>
+                <td style="width: 20px"></td>
+                <td class="sortable-column" style="width: 100px">ID</td>
+                <td class="sortable-column">内容</td>
+                <td class="sortable-column">留言人</td>
+                <td class="sortable-column">性别</td>
+                <td class="sortable-column">邮箱</td>
+                <td class="sortable-column">留言时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var messageinfo in (List<MessageInfo>)ViewData["msgs"])
+            {
+                <tr>
+                    <td>
+                        <label class="input-control checkbox small-check no-margin">
+                            <input type="checkbox" class="cbox" value="@messageinfo.Id">
+                            <span class="check"></span>
+                        </label>
+                    </td>
+                    <td>@messageinfo.Id</td>
+                    <td>@messageinfo.Content</td>
+                    <td>@messageinfo.Name</td>
+                    <td>@messageinfo.Sex</td>
+                    <td>@messageinfo.Email</td>
+                    <td>@messageinfo.SubTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div data-role="dialog,draggable" id="replydialog" class="padding20" data-close-button="true" data-overlay="true" data-overlay-color="op-dark" data-overlay-click-close="true">
+    <iframe id="replyform" width="500px" height="300px" frameborder="0"></iframe>
+</div>
+<script type="text/javascript">
+
+    function showDialog(id) {
+        var dialog = $("#" + id).data('dialog');
+        if (!dialog.element.data('opened')) {
+            dialog.open();
+        } else {
+            dialog.close();
+        }
+    }
+
+    function getallcheck() {
+        var allbox = $(".cbox");
+        if (allbox.length != 0) {
+            var selectbox = null;
+            var num = 0;
+            for (var i = 0; i < allbox.length; i++) {
+                if (allbox[i].checked) {
+                    num = num + 1;
+                    selectbox = allbox[i];
+                }
+            }
+            if (num == 0) {
+                return { Num: 0 };
+            }
+            return { Num: num, SelectBox: selectbox.value };
+        } else {
+            return { Num: 0 };
+        }
+    }
+
+    function update() {
+        var allcheck = getallcheck();
+        if (allcheck.Num == 1) {
+            $("#replyform").attr("src", "/AdminMessage/Reply/" + allcheck.SelectBox);
+            showDialog('replydialog');
+            return;
+        }
+        alert("请选择一个回复对象 !");
+    }
+
+
+    function confirmdel() {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            del();
+        }
+    }
+
+    function del() {
+        var allbox = $(".cbox");
+        var selected = "";
+        for (var i = 0; i < allbox.length; i++) {
+            if (allbox[i].checked) {
+                selected = selected + allbox[i].value + ",";
+            }
+        }
+        if (selected == "") {
+            alert("请选择删除对象 !");
+            return;
+        }
+        $.post("Delete", { "ids": selected }, function (data) {
+            if (data == "ok") {
+                alert("删除成功 !");
+                gotomain();
+            }
+            else {
+                alert("删除失败 !");
+            }
+        });
+    }
+
+    function confirmdel() {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            del();
+        }
+    }
+
+    function gotomain() {
+        window.location.href = "/AdminMessage/Index";
+    }
+
+</script>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <object name="AdminInfoService" type="ZKH.Blog.BLL.AdminInfoService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="AdminInfoDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="AdminInfoExtService" type="ZKH.Blog.BLL.AdminInfoExtService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="AdminInfoExtDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="ArticleInfoService" type="ZKH.Blog.BLL.ArticleInfoService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="ArticleInfoDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="ArticleTypeService" type="ZKH.Blog.BLL.ArticleTypeService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="ArticleTypeDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="CommentInfoService" type="ZKH.Blog.BLL.CommentInfoService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="CommentInfoDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="MessageInfoService" type="ZKH.Blog.BLL.MessageInfoService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="MessageInfoDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="PhotoInfoService" type="ZKH.Blog.BLL.PhotoInfoService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="PhotoInfoDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="PhotoTypeService" type="ZKH.Blog.BLL.PhotoTypeService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="PhotoTypeDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="ReplyInfoService" type="ZKH.Blog.BLL.ReplyInfoService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="ReplyInfoDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="WebInfoService" type="ZKH.Blog.BLL.WebInfoService, ZKH.Blog.BLL" singleton="false" >
+    <property name="CurrentDal" ref="WebInfoDal" />
+    <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="AdvertisingInfoService" type="ZKH.Blog.BLL.AdvertisingInfoService, ZKH.Blog.BLL" singleton="false" >
+  <property name="CurrentDal" ref="AdvertisingInfoDal" />
+   <property name="dbSession" ref="DbSession" />
+  </object>
+  <object name="DbSession" type="ZKH.Blog.DalFactory.DbSessionFactory, ZKH.Blog.DalFactory" singleton="false" factory-method="GetCurrentDbSession">
+  </object>
+  <!--intentionally do NOT register the AccountController with the container; demonstrates that the underlying
+  default controller factory will properly (attempt to!) resolve all controllers not registered with Spring.NET
+  using its default controller resolution behavoir-->
+  <!--<object type="Spring.MvcQuickStart.Controllers.AccountController, Spring.MvcQuickStart" singleton="false" />-->
+</objects>

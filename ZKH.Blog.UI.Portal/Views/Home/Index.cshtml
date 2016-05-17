@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "首页";
+    var Info = (WebInfo)ViewBag.Info;
+    ViewBag.Name = Info.Name;
+}
+
+@using ZKH.Blog.Model
+
+
+<div class="grid">
+    <div class="row cells5">
+        <!--左-->
+        <div class="cell" style="padding:5px">
+            @Html.Partial("_introduce")
+            <div class="panel">
+                <div class="heading">
+                    <span class="title">最新文章</span>
+                </div>
+                <div class="content padding10">
+                    <ul class="simple-list">
+                        @foreach (ArticleInfo article in ((List<ArticleInfo>)ViewBag.Articles).Take(8))
+                        {
+                            <li><a href="/Article/Content/@article.Id" target="_blank">@article.Title</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>    
+        </div>
+        <!--中-->
+        <div class="cell colspan3">
+            @foreach (ArticleInfo article in ((List<ArticleInfo>)ViewBag.Articles).Take(6))
+            {
+                <div class="example" data-text="">
+                    <a href="/Article/Content/@article.Id" target="_blank">
+                        <h3>@article.Title</h3>
+                    </a>
+                    <h5>@article.ModifiedOn</h5>
+                    <p>@article.Summary . . .&nbsp;
+                    <a href="/Article/Content/@article.Id" target="_blank">查看全文</a>
+                    </p>
+                </div>
+            }
+        </div>
+        @Html.Partial("_advertising")  
+    </div>
+    @Html.Partial("_photowall")
+</div>

@@ -1,0 +1,11 @@
+﻿
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+@model ZKH.Blog.Model.ArticleInfo
+
+<div class="container padding20 bg-white" style="margin-left:50px;padding-right:300px">
+    <p><h1 style="font-weight:300">文章详情</h1></p><hr /><br />
+    <h3>@Model.Title</h3><br />
+    <p>@MvcHtmlString.Create(Model.Content)</p>
+</div>

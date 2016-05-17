@@ -1,0 +1,88 @@
+﻿
+@using ZKH.Blog.Model
+@{
+    var article = (ArticleInfo)ViewBag.Articles;
+    ViewBag.Title = article.Title;
+    var Info = (WebInfo)ViewBag.Info;
+    ViewBag.Name = Info.Name;
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+
+    function afterSubmit(data) {
+        if (data.result == "ok") {
+            var comdiv = $("<div class='example'><blockquote><p>" + data.com.Content + "</p><small>" + data.com.Name + " &nbsp;&nbsp;&nbsp; 刚刚</small></blockquote></div>");
+            $("#comDiv").prepend(comdiv);
+        } else {
+            alert("留言失败，请重试 ！");
+        }    
+    }
+
+</script>
+
+<div class="grid">
+    <div class="row cells5">
+        <!--左-->
+        <div class="cell" style="padding:5px">
+            <div class="cell">
+                <div data-role="calendar"></div>
+            </div>
+            <br />
+            <div class="panel">
+                <div class="heading">
+                    <span class="title">文章分类</span>
+                </div>
+                <div class="content padding10">
+                    <ul class="simple-list">
+                        <li><a href="/Article/Index">全部</a></li>
+                        @foreach (ArticleType type in (List<ArticleType>)ViewBag.Types)
+                        {
+                            <li><a href="/Article/Index/@type.Id">@type.Type</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--中-->
+        <div class="cell colspan3">
+            <ul class="breadcrumbs2">
+                <li><a href="/Home/Index"><span class="icon mif-home"></span></a></li>
+                <li><a href="/Article/Index">文章</a></li>
+                <li><a href="/Article/Index/@ViewBag.Type.Id">@ViewBag.Type.Type</a></li>
+                <li><a href="/Article/Index/@article.Id">内容</a></li>
+            </ul>
+            <div style="text-align:center">
+                <h3>@article.Title</h3><br />
+                <p style="font-size:small">@article.ModifiedOn &nbsp;&nbsp;&nbsp; 作者：@article.Author</p>
+            </div>
+            <hr /><br />
+            <p>@MvcHtmlString.Create(article.Content)</p><br /><br />
+            <hr /><br />
+            <div class="example" data-text="评论">
+                @using (Ajax.BeginForm("Comment", new AjaxOptions() { OnSuccess = "afterSubmit" }))
+                {
+                    <input type="hidden" name="ArticleInfoId" value="@article.Id" />
+                    <label>称呼</label>
+                    <input class="input-control full-size" name="Name" />
+                    <label>内容</label>
+                    <div class="input-control textarea full-size" data-text="评论">
+                        <textarea name="Content"></textarea>
+                    </div>
+                    <input class="primary full-size" type="submit" value="提交" /><br /><hr /><br />
+                }
+                <div id="comDiv">
+                    @foreach (CommentInfo comment in (List<CommentInfo>)ViewBag.Comm)
+                    {
+                        <div class="example">
+                            <blockquote>
+                                <p>@comment.Content</p>
+                                <small>@comment.Name &nbsp;&nbsp;&nbsp; @comment.SubTime</small>
+                            </blockquote>
+                        </div>
+                     }
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_advertising")
+    </div>
+</div>

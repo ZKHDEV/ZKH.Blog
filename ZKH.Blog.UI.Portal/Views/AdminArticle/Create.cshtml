@@ -1,0 +1,116 @@
+﻿
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+@using ZKH.Blog.Model
+<script src="~/Scripts/MyAjaxForm.js"></script>
+<script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+<link href="~/Content/kindeditor/themes/default/default.css" rel="stylesheet" />
+<script src="~/Content/kindeditor/plugins/code/prettify.js"></script>
+<link href="~/Content/kindeditor/plugins/code/prettify.css" rel="stylesheet" />
+<script src="~/Content/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript">
+    //富文本编辑器
+    KindEditor.ready(function (K) {
+        var editor1 = K.create('#MsgContent', {
+            cssPath: '/Content/kindeditor/plugins/code/prettify.css',
+            uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+            fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+            allowFileManager: true,
+            afterBlur: function () { this.sync(); },//注意这里（异步提交时需要同步）
+            afterCreate: function () {
+                var self = this;
+                self.sync();//把富文本编辑器的内容放到  文本域里面去。
+            }
+        });
+        prettyPrint();//注意要调用该方法.
+    });
+
+    function afterSubmit(data) {
+        if (data == "no") {
+            alert("添加失败 ！");
+            return;
+        }
+        gotomain();
+    }
+
+    function gotomain() {
+        window.location.href = "/AdminArticle/Index";
+    }
+
+</script>
+
+<div class="container padding20 bg-white" style="margin-left:50px;padding-right:300px">
+    <p><h1 style="font-weight:300">添加文章</h1></p><br />
+    <!--enctype="multipart/form-data" 验证上传文件的正确编码-->
+    <form id="form" action="/AdminArticle/Create" data-ajax-success="afterSubmit" data-ajax="true" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+        @Html.AntiForgeryToken()
+        <div class="grid">
+            <div class="row">
+                <div class="cell">
+                    <label>标题</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Title">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>内容</label>
+                    <div class="full-size" data-role="input" style="margin-top:5px">
+                        <textarea id="MsgContent" cols="100" rows="12" style="visibility: hidden;" name="Content"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>内容摘要</label>
+                    <div class="full-size" data-role="input" style="margin-top:5px">
+                        <div class="input-control textarea full-size">
+                            <textarea name="Summary"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>文章类型</label>
+                    @foreach (var type in (List<ArticleType>)ViewData["types"])
+                    {
+                        <br />
+                            <label class="input-control radio">
+                                <input type="radio" name="ArticleTypeId" value="@type.Id">
+                                <span class="check"></span>
+                                <span class="caption">@type.Type</span>
+                            </label>
+                            <br />
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <div class="padding20 no-padding-right no-padding-left no-padding-top">
+                        <input type="submit" value="添加" class="button info block-shadow-info text-shadow" />
+                        <input type="reset" value="重置" />
+                        <input type="button" value="取消" onclick="gotomain()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function afterSubmit(data) {
+        if (data == "no") {
+            alert("添加失败 ！");
+            return;
+        }
+        gotomain();
+    }
+
+    function gotomain() {
+        window.location.href = "/AdminArticle/Index";
+    }
+
+</script>

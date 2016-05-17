@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "联系";
+    var Info = (WebInfo)ViewBag.Info;
+    ViewBag.Name = Info.Name;
+}
+
+@using ZKH.Blog.Model
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+
+    function afterSubmit(data) {
+        if (data.result == "ok") {
+            var comdiv = $("<div class='example'><blockquote><p>" + data.com.Content + "</p><small>" + data.com.Name + " &nbsp;&nbsp;&nbsp; 刚刚</small></blockquote></div>");
+            $("#comDiv").prepend(comdiv);
+        } else {
+            alert("提交失败，请重试 ！");
+        }
+    }
+
+    function afterSend(data) {
+        alert(data);
+    }
+
+</script>
+
+<div class="grid">
+    <div class="row cells5">
+        <!--左-->
+        <div class="cell" style="padding:5px">
+            @Html.Partial("_introduce")
+            <div class="panel">
+                <div class="heading">
+                    <span class="title">最新文章</span>
+                </div>
+                <div class="content padding10">
+                    <ul class="simple-list">
+                        @foreach (ArticleInfo article in ((List<ArticleInfo>)ViewBag.Articles).Take(8))
+                        {
+                            <li><a href="/Article/Content/@article.Id" target="_blank">@article.Title</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--中-->
+        <div class="cell colspan3">
+            <ul class="breadcrumbs2">
+                <li><a href="/Home/Index"><span class="icon mif-home"></span></a></li>
+                <li><a href="/Home/Connect">联系</a></li>
+            </ul>
+            <div class="example">
+                <p><h1 style="font-weight:300">发送电子邮件</h1></p><hr />
+                @using (Ajax.BeginForm("Email", "Home", new AjaxOptions() { OnSuccess = "afterSend" }, new { id = "emailform" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <label>称呼</label>
+                    <input class="input-control full-size" name="Name"/>
+                    <label>标题</label>
+                    <input class="input-control full-size" name="Title"/>
+                    <label>内容</label>
+                    <div class="input-control textarea full-size">
+                        <textarea name="Econtent" id="content"></textarea>
+                    </div>
+                    <input class="primary full-size" type="submit" value="发送" /><br /><hr /><br />
+                }
+            </div>
+            <div class="example">
+                <p><h1 style="font-weight:300">留言</h1></p><hr />
+                @using (Ajax.BeginForm("Message", "Home", new AjaxOptions() { OnSuccess = "afterSubmit" }, new { id = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <label>称呼</label>
+                    <input class="input-control full-size" name="Name" id="name" />
+                        <div class="row cells2">
+                            <div class="cell">
+                                <label style="margin-right:15px">性别</label>
+                                <label class="input-control radio">
+                                    <input type="radio" name="Sex" value="男" checked>
+                                    <span class="check"></span>
+                                    <span class="caption">男</span>
+                                </label>
+                            </div>
+                            <div class="cell">
+                                <label class="input-control radio">
+                                    <input type="radio" name="Sex" value="女">
+                                    <span class="check"></span>
+                                    <span class="caption">女</span>
+                                </label>
+                            </div>
+                        </div>
+                        <label>邮箱</label>
+                        <input class="input-control full-size" name="Email" id="email" />
+                        <label>内容</label>
+                        <div class="input-control textarea full-size" data-text="评论">
+                            <textarea name="Content" id="content"></textarea>
+                        </div>
+                        <input class="primary full-size" type="submit" value="提交" /><br /><hr /><br />
+                }
+                <div id="comDiv">
+                    @foreach (MessageInfo message in (List<MessageInfo>)ViewBag.Msg)
+                    {
+                        <div class="example">
+                            <blockquote>
+                                <p>@message.Content</p>
+                                <small>@message.Name &nbsp;&nbsp;&nbsp; @message.SubTime</small>
+                            </blockquote>
+                            <div class="grid example">
+                                @foreach (ReplyInfo reply in message.ReplyInfo.Where(a => a.DelFlag == (short)0).ToList())
+                                {
+                                    <div class="row">
+                                        <blockquote class="place-right">
+                                            <p>@reply.Content</p>
+                                            <small>@reply.SubTime &nbsp;&nbsp;&nbsp; 管理员</small>
+                                        </blockquote>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="example">
+                <p><h1 style="font-weight:300">联系方式</h1></p><hr />
+                <div class="grid">
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>联系电话：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Info.Phone</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>邮箱：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4><a href="mailto:@Info.Email">@Info.Email</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_advertising")
+    </div>
+</div>

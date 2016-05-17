@@ -1,0 +1,150 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "用户管理";
+}
+@using ZKH.Blog.Model
+
+<div class="padding20 bg-white">
+    <h1 class="text-light">用户管理<span class="mif-users place-right"></span></h1>
+    <hr class="thin bg-grayLighter">
+    <button class="button primary" onclick="detail()"> 详细</button>
+    <button class="button success" onclick="update()"> 修改</button>
+    <button class="button alert" onclick="confirmdel()"> 删除</button>
+    <hr class="thin bg-grayLighter">
+    <table class="dataTable border bordered" data-role="datatable" data-auto-width="false">
+        <thead>
+            <tr>
+                <td style="width: 20px"></td>
+                <td class="sortable-column" style="width: 100px">ID</td>
+                <td class="sortable-column">用户名</td>
+                <td class="sortable-column">超级用户</td>
+                <td class="sortable-column">备注</td>
+                <td class="sortable-column">修改时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var userinfo in (List<AdminInfo>)ViewData["adminInfo"])
+            {
+                <tr>
+                    <td>
+                        <label class="input-control checkbox small-check no-margin">
+                            <input type="checkbox" class="cbox" value="@userinfo.Id">
+                            <span class="check"></span>
+                        </label>
+                    </td>
+                    <td>@userinfo.Id</td>
+                    <td>@userinfo.UName</td>
+                    @if (userinfo.IsSuperUser)
+                    {
+                        <td>是</td>
+                    }
+                    else
+                    {
+                        <td>否</td>
+                    }
+                    <td>@userinfo.Remark</td>
+                    <td>@userinfo.ModifiedOn</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div data-role="dialog,draggable" id="editdialog" class="padding20" data-close-button="true" data-overlay="true" data-overlay-color="op-dark" data-overlay-click-close="true">
+    <iframe id="editform" width="400px" height="200px" scrolling="no" frameborder="0"></iframe>
+</div>
+<div data-role="dialog,draggable" id="detaildialog" class="padding20" data-close-button="true" data-overlay="true" data-overlay-color="op-dark" data-overlay-click-close="true">
+    <iframe id="detailform" width="800px" height="450px" frameborder="0"></iframe>
+</div>
+
+<script type="text/javascript">
+    function showDialog(id) {
+        var dialog = $("#" + id).data('dialog');
+        if (!dialog.element.data('opened')) {
+            dialog.open();
+        } else {
+            dialog.close();
+        }
+    }
+
+    function detail() {
+        var allcheck = getallcheck();
+        if (allcheck.Num == 1) {
+            $("#detailform").attr("src", "/AdminUser/Detail/" + allcheck.SelectBox);
+            showDialog('detaildialog');
+            return;
+        }
+        alert("请选择一个对象 !");
+    }
+
+    function confirmdel() {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            del();
+        }
+    }
+
+    function del() {
+        var allbox = $(".cbox");
+        var selected = "";
+        for (var i = 0; i < allbox.length; i++) {
+            if (allbox[i].checked) {
+                selected = selected + allbox[i].value + ",";
+            }
+        }
+        if (selected == "") {
+            alert("请选择删除对象 !");
+            return;
+        }
+        $.post("Delete", { "ids": selected }, function (data) {
+            if (data == "ok") {
+                alert("删除成功 !");
+                initwindow();
+            }
+            else {
+                alert("删除失败 !");
+            }
+        });
+    }
+
+    function getallcheck() {
+        var allbox = $(".cbox");
+        if (allbox.length != 0) {
+            var selectbox = null;
+            var num = 0;
+            for (var i = 0; i < allbox.length; i++) {
+                if (allbox[i].checked) {
+                    num = num + 1;
+                    selectbox = allbox[i];
+                }
+            }
+            if (num == 0) {
+                return { Num: 0 };
+            }
+            return { Num: num, SelectBox: selectbox.value };
+        } else {
+            return { Num: 0 };
+        }
+    }
+
+    function update() {
+        var allcheck = getallcheck();
+        if (allcheck.Num == 1) {
+            $("#editform").attr("src", "/AdminUser/Update/" + allcheck.SelectBox);
+            showDialog('editdialog');
+            return;
+        }
+        alert("请选择一个修改对象 !");
+    }
+
+    function closeeditwindow() {
+        hideMetroDialog('#updatedialog');
+        hideMetroDialog('#detaildialog');
+    }
+
+    function initwindow() {
+        window.location.href = "/AdminUser/Index";
+    }
+
+</script>
+

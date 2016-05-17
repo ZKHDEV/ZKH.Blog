@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <object name="CacheWriter" type="ZKH.Blog.Common.Cache.MemcachedWriter, ZKH.Blog.Common" singleton="false" >
+  </object>
+
+  <!--可去掉注释转化为HttpRuntimeCache-->
+  <!--<object name="CacheWriter" type="ZKH.Blog.Common.Cache.HttpRuntimeCache, ZKH.Blog.Common" singleton="false" >  
+  </object>-->
+</objects>

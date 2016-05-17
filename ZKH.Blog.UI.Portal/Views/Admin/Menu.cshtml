@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "磁贴菜单";
+}
+@model ZKH.Blog.Model.AdminInfo
+
+    <div class="tile-container bg-darkCobalt padding20">
+        <a href="/AdminPerMsg/Index" class="tile bg-cyan fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-profile"></span>
+            </div>
+            <span class="tile-label">个人信息</span>
+        </a>
+        <a href="/AdminArticle/Index" class="tile bg-orange fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-file-text"></span>
+            </div>
+            <span class="tile-label">文章管理</span>
+        </a>
+        <a href="/AdminPhoto/Index" class="tile bg-green fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-images"></span>
+            </div>
+            <span class="tile-label">相册管理</span>
+        </a>
+        <a href="/AdminComment/Index" class="tile bg-pink fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-bubbles"></span>
+            </div>
+            <span class="tile-label">评论管理</span>
+        </a>
+        <a href="/AdminMessage/Index" class="tile bg-cobalt fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-mail-read"></span>
+            </div>
+            <span class="tile-label">留言管理</span>
+        </a>
+        @if (Model.IsSuperUser)
+        {
+            <a href="/AdminUser/Index" class="tile bg-red fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-users"></span>
+                </div>
+                <span class="tile-label">用户管理</span>
+            </a>
+            <a href="/AdminAdvertising/Index" class="tile bg-green fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-flag"></span>
+                </div>
+                <span class="tile-label">广告管理</span>
+            </a>
+            <a href="/AdminWeb/Index" class="tile bg-lighterBlue fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-cogs"></span>
+                </div>
+                <span class="tile-label">网站信息</span>
+            </a>
+        }
+    </div>

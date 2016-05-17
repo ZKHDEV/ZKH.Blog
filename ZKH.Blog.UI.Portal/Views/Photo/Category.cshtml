@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = ViewBag.Type.Type + " - 相册";
+    var Info = (WebInfo)ViewBag.Info;
+    ViewBag.Name = Info.Name;
+}
+@using ZKH.Blog.Model
+<div class="grid">
+    <div class="row cells5">
+        <!--左-->
+        <div class="cell" style="padding:5px">
+            <div class="cell">
+                <div data-role="calendar"></div>
+            </div>
+            <br />
+            <div class="panel">
+                <div class="heading">
+                    <span class="title">相册类别</span>
+                </div>
+                <div class="content padding10">
+                    <ul class="simple-list">
+                        @foreach (var type in ViewBag.Types)
+                        {
+                            <li><a href="/Photo/Category/@type.Id?p=1">@type.Type</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--中-->
+        <div class="cell colspan3">
+            <ul class="breadcrumbs2">
+                <li><a href="/Home/Index"><span class="icon mif-home"></span></a></li>
+                <li><a href="/Photo/Index">相册</a></li>
+                <li><a href="/Photo/Category/@ViewBag.Type.Id">@ViewBag.Type.Type</a></li>
+            </ul>
+            <div class="tile-container bg-darkCobalt">
+                @foreach (PhotoInfo photo in ViewBag.Photos)
+                {
+                    <a href="/Photo/Detail/@photo.Id">
+                        <div class="tile fg-white" data-role="tile">
+                            <div class="tile-content">
+                                <img src="@photo.Url" data-role="fitImage" data-format='square'>
+                                <div class="tile-label">@photo.Title</div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+        @Html.Partial("_advertising")
+    </div>
+</div>
+

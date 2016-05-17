@@ -1,0 +1,20 @@
+﻿
+@using ZKH.Blog.Model
+@{
+    var Info = (WebInfo)ViewBag.Info;
+    var Total = ((List<ArticleInfo>)ViewBag.Articles).Count();
+    var PTotal = ((List<PhotoInfo>)ViewBag.Photos).Count();
+}
+
+<div style="text-align:center;">
+    <p><img src="@Info.Photo" alt="头像" data-format="cycle" data-role="fitImage"></p>
+    <p style="text-align:center"><h3>@Info.Creator</h3></p>
+    <p><a href="/Article/Index"><span class="mif-file-word"></span>文章(@Total)</a> | <a href="/Photo/Index"><span class="mif-images"></span> 图片(@PTotal)</a></p>
+</div>
+<div class="cell">
+    <div class='video-container'><iframe src='@Info.Vedio' frameborder='0' allowfullscreen></iframe></div>
+    @*<div class='video-container'><video src="@Info.Vedio" controls></video></div>*@
+        @*<embed src="http://player.youku.com/player.php/sid/XODAxMjAyNzg4/v.swf" allowFullScreen="true" quality="high" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" />*@
+        @*<iframe src="http://player.youku.com/embed/XODAxMjAyNzg4" frameborder=0 allowfullscreen></iframe>*@
+    </div>
+<br />

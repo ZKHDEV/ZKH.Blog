@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a20173cc3037482f8e904a2bff63dcca" Name="Diagram1" >
+        <EntityTypeShape EntityType="DataModel.AdminInfo" Width="1.5" PointX="2.75" PointY="0.5" />
+        <EntityTypeShape EntityType="DataModel.AdminInfoExt" Width="1.5" PointX="2.625" PointY="3.5" />
+        <EntityTypeShape EntityType="DataModel.ArticleInfo" Width="1.5" PointX="9" PointY="0.875" />
+        <EntityTypeShape EntityType="DataModel.ArticleType" Width="1.5" PointX="6" PointY="0.5" />
+        <EntityTypeShape EntityType="DataModel.CommentInfo" Width="1.5" PointX="6.875" PointY="3.25" />
+        <EntityTypeShape EntityType="DataModel.PhotoInfo" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DataModel.PhotoType" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="DataModel.MessageInfo" Width="1.5" PointX="4.5" PointY="6" />
+        <EntityTypeShape EntityType="DataModel.ReplyInfo" Width="1.5" PointX="4.625" PointY="3.25" />
+        <EntityTypeShape EntityType="DataModel.WebInfo" Width="1.5" PointX="7" PointY="6.125" />
+        <EntityTypeShape EntityType="DataModel.AdvertisingInfo" Width="1.5" PointX="0.5" PointY="6.875" />
+        <AssociationConnector Association="DataModel.ArticleTypeArticleInfo" />
+        <AssociationConnector Association="DataModel.PhotoInfoPhotoType" />
+        <AssociationConnector Association="DataModel.CommentInfoArticleInfo" />
+        <AssociationConnector Association="DataModel.MessageInfoReplyInfo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

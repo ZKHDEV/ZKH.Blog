@@ -1,0 +1,125 @@
+﻿
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "广告管理";
+}
+@model ZKH.Blog.Model.AdvertisingInfo
+
+<script src="~/Scripts/MyAjaxForm.js"></script>
+
+<div class="container padding20 bg-white" style="margin-left:50px;padding-right:300px">
+    <p><h1 style="font-weight:300">广告信息</h1></p><br />
+    <!--enctype="multipart/form-data" 验证上传文件的正确编码-->
+    <form id="form" enctype="multipart/form-data" action="Update" data-ajax-success="afterSubmit" data-ajax="true" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="SubTime" value="@Model.SubTime" />
+        <input type="hidden" name="DelFlag" value="@Model.DelFlag" />
+        <div class="grid">
+            <div class="row">
+                <div class="cell">
+                    <label>广告投放人</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Signer" value="@Model.Signer">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>公司</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Company" value="@Model.Company">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row cells2">
+                <div class="cell">
+                    <label>内容</label>
+                    <input type="hidden" name="Url" id="photo" value="@Model.Url" />
+                    <div class="input-control file full-size" data-role="input">
+                        <input type="file" accept="image/jpeg,image/gif,image/png" name="photoFile" onchange="uploadphoto(this)">
+                        <button class="button"><span class="mif-folder"></span></button>
+                    </div>
+                    <label>图片需小于20MB，支持格式：.jpg , .png , .gif , .ico</label>
+                </div>
+                <div class="cell" id="photoDiv">
+                    <img id='headimg' src='@Model.Url' />
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>链接</label><br />
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Link" value="@Model.Link">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <div class="padding20 no-padding-right no-padding-left no-padding-top">
+                        <input type="submit" value="完成" class="button info block-shadow-info text-shadow" />
+                        <input type="reset" value="重置" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    function afterSubmit(data) {
+        alert(data);
+    }
+
+    function checkupload(target, type) {
+        var filepath = target.value;
+        if (filepath === null) {
+            return false;
+        }
+        var ext = filepath.substring(filepath.lastIndexOf("."));
+        var allowext = null;
+        var allowsize = 0;
+        if (type === "img") {
+            allowext = [".jpeg", ".jpg", ".png", ".gif", ".ico"];
+            allowsize = 20000000;
+        } else {
+            allowext = [".mp4", ".wmv", ".flv", ".rm", ".swf", ".rmvb"];
+            allowsize = 50000000;
+        }
+        for (var i = 0; i < allowext.length; i++) {
+            if (allowext[i] === ext) {
+                break;
+            }
+        }
+        if (i === allowext.length) {
+            alert("不支持该格式 !");
+            return false;
+        }
+        var size = target.files[0].size;
+        if (size > allowsize) {
+            alert("所选文件过大 !");
+            return false;
+        }
+        return true;
+    }
+
+    function uploadphoto(target) {
+        if (checkupload(target, "img")) {
+            $("#form").ajaxSubmit({
+                url: "/AdminAdvertising/UploadPhoto",
+                type: "Post",
+                success: function (data) {
+                    var str = data.split(':');
+                    if (str[0] == "ok") {
+                        $("#photo").val(str[1]);
+                        $("#photoDiv").html("<img id='headimg' src='" + str[1] + "' />");
+                    } else {
+                        alert(str[1]);
+                    }
+                }
+            });
+        }     
+    }
+</script>

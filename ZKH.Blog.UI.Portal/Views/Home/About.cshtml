@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "关于";
+    var Info = (WebInfo)ViewBag.Info;
+    ViewBag.Name = Info.Name;
+}
+
+@using ZKH.Blog.Model
+
+<div class="grid">
+    <div class="row cells5">
+        <!--左-->
+        <div class="cell" style="padding:5px">
+            @Html.Partial("_introduce")
+            <div class="panel">
+                <div class="heading">
+                    <span class="title">最新文章</span>
+                </div>
+                <div class="content padding10">
+                    <ul class="simple-list">
+                        @foreach (ArticleInfo article in ((List<ArticleInfo>)ViewBag.Articles).Take(8))
+                        {
+                            <li><a href="/Article/Content/@article.Id" target="_blank">@article.Title</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--中-->
+        <div class="cell colspan3">
+            <ul class="breadcrumbs2">
+                <li><a href="/Home/Index"><span class="icon mif-home"></span></a></li>
+                <li><a href="/Home/About">关于</a></li>
+            </ul>
+            <div class="example">
+                <p><h1 style="font-weight:300">关于</h1></p><hr />
+                <div class="grid">
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>网站名称：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Info.Name</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>管理员：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Info.Creator</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>所在地：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Info.Address</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>链接：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4><a href="/Home/Index">@Info.Link</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_advertising")
+    </div>
+    @Html.Partial("_photowall")
+</div>

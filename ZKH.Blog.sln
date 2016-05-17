@@ -1,0 +1,122 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKH.Blog.DAL", "ZKH.Blog.DAL\ZKH.Blog.DAL.csproj", "{ED633C56-3CB5-4591-B904-A2B661A789EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKH.Blog.IDAL", "ZKH.Blog.IDAL\ZKH.Blog.IDAL.csproj", "{BB843512-2A0A-4469-84EB-14D72D51E7E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKH.Blog.BLL", "ZKH.Blog.BLL\ZKH.Blog.BLL.csproj", "{3E3E5316-76A9-4014-B06F-EA1A5F31391A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKH.Blog.IBLL", "ZKH.Blog.IBLL\ZKH.Blog.IBLL.csproj", "{572858C2-4462-423E-BE86-E7B8F4EDE8D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKH.Blog.Model", "ZKH.Blog.Model\ZKH.Blog.Model.csproj", "{0B11CE8E-A540-4136-B1F7-4BFE35C47B7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKH.Blog.Common", "ZKH.Blog.Common\ZKH.Blog.Common.csproj", "{59069162-4AC7-4237-86CC-D8725815A9EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKH.Blog.UI.Portal", "ZKH.Blog.UI.Portal\ZKH.Blog.UI.Portal.csproj", "{8F88DE69-C3CD-439B-B1F7-EE06BE25DB0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{BEFBD4B4-24E3-40EF-B090-3708A26890F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{EFF72FAD-BD82-4039-B1F7-39A1E52530CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{85FE4C80-C83D-4EEE-A06C-4D25A14C50B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{C39AC3F6-4936-448A-8C79-C02A170A2E3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{405387C0-F3A1-4DBF-AFDC-84F98D97DC31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKH.Blog.DalFactory", "ZKH.Blog.DalFactory\ZKH.Blog.DalFactory.csproj", "{42B1926D-C10A-418C-BF97-E57C63AF8C9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED633C56-3CB5-4591-B904-A2B661A789EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED633C56-3CB5-4591-B904-A2B661A789EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED633C56-3CB5-4591-B904-A2B661A789EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED633C56-3CB5-4591-B904-A2B661A789EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB843512-2A0A-4469-84EB-14D72D51E7E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB843512-2A0A-4469-84EB-14D72D51E7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB843512-2A0A-4469-84EB-14D72D51E7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB843512-2A0A-4469-84EB-14D72D51E7E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3E5316-76A9-4014-B06F-EA1A5F31391A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3E5316-76A9-4014-B06F-EA1A5F31391A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3E5316-76A9-4014-B06F-EA1A5F31391A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3E5316-76A9-4014-B06F-EA1A5F31391A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{572858C2-4462-423E-BE86-E7B8F4EDE8D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{572858C2-4462-423E-BE86-E7B8F4EDE8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{572858C2-4462-423E-BE86-E7B8F4EDE8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{572858C2-4462-423E-BE86-E7B8F4EDE8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B11CE8E-A540-4136-B1F7-4BFE35C47B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B11CE8E-A540-4136-B1F7-4BFE35C47B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B11CE8E-A540-4136-B1F7-4BFE35C47B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B11CE8E-A540-4136-B1F7-4BFE35C47B7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59069162-4AC7-4237-86CC-D8725815A9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59069162-4AC7-4237-86CC-D8725815A9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59069162-4AC7-4237-86CC-D8725815A9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59069162-4AC7-4237-86CC-D8725815A9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F88DE69-C3CD-439B-B1F7-EE06BE25DB0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F88DE69-C3CD-439B-B1F7-EE06BE25DB0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F88DE69-C3CD-439B-B1F7-EE06BE25DB0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F88DE69-C3CD-439B-B1F7-EE06BE25DB0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42B1926D-C10A-418C-BF97-E57C63AF8C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42B1926D-C10A-418C-BF97-E57C63AF8C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42B1926D-C10A-418C-BF97-E57C63AF8C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42B1926D-C10A-418C-BF97-E57C63AF8C9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED633C56-3CB5-4591-B904-A2B661A789EF} = {BEFBD4B4-24E3-40EF-B090-3708A26890F4}
+		{BB843512-2A0A-4469-84EB-14D72D51E7E4} = {BEFBD4B4-24E3-40EF-B090-3708A26890F4}
+		{3E3E5316-76A9-4014-B06F-EA1A5F31391A} = {EFF72FAD-BD82-4039-B1F7-39A1E52530CA}
+		{572858C2-4462-423E-BE86-E7B8F4EDE8D5} = {EFF72FAD-BD82-4039-B1F7-39A1E52530CA}
+		{0B11CE8E-A540-4136-B1F7-4BFE35C47B7A} = {C39AC3F6-4936-448A-8C79-C02A170A2E3E}
+		{59069162-4AC7-4237-86CC-D8725815A9EC} = {85FE4C80-C83D-4EEE-A06C-4D25A14C50B5}
+		{8F88DE69-C3CD-439B-B1F7-EE06BE25DB0E} = {405387C0-F3A1-4DBF-AFDC-84F98D97DC31}
+		{42B1926D-C10A-418C-BF97-E57C63AF8C9D} = {BEFBD4B4-24E3-40EF-B090-3708A26890F4}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://zhangkh101.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ZKH.Blog.BLL\\ZKH.Blog.BLL.csproj
+		SccProjectTopLevelParentUniqueName1 = ZKH.Blog.sln
+		SccProjectName1 = ZKH.Blog.BLL
+		SccLocalPath1 = ZKH.Blog.BLL
+		SccProjectUniqueName2 = ZKH.Blog.Common\\ZKH.Blog.Common.csproj
+		SccProjectTopLevelParentUniqueName2 = ZKH.Blog.sln
+		SccProjectName2 = ZKH.Blog.Common
+		SccLocalPath2 = ZKH.Blog.Common
+		SccProjectUniqueName3 = ZKH.Blog.DAL\\ZKH.Blog.DAL.csproj
+		SccProjectTopLevelParentUniqueName3 = ZKH.Blog.sln
+		SccProjectName3 = ZKH.Blog.DAL
+		SccLocalPath3 = ZKH.Blog.DAL
+		SccProjectUniqueName4 = ZKH.Blog.IBLL\\ZKH.Blog.IBLL.csproj
+		SccProjectTopLevelParentUniqueName4 = ZKH.Blog.sln
+		SccProjectName4 = ZKH.Blog.IBLL
+		SccLocalPath4 = ZKH.Blog.IBLL
+		SccProjectUniqueName5 = ZKH.Blog.IDAL\\ZKH.Blog.IDAL.csproj
+		SccProjectTopLevelParentUniqueName5 = ZKH.Blog.sln
+		SccProjectName5 = ZKH.Blog.IDAL
+		SccLocalPath5 = ZKH.Blog.IDAL
+		SccProjectUniqueName6 = ZKH.Blog.Model\\ZKH.Blog.Model.csproj
+		SccProjectTopLevelParentUniqueName6 = ZKH.Blog.sln
+		SccProjectName6 = ZKH.Blog.Model
+		SccLocalPath6 = ZKH.Blog.Model
+		SccProjectUniqueName7 = ZKH.Blog.UI.Portal\\ZKH.Blog.UI.Portal.csproj
+		SccProjectTopLevelParentUniqueName7 = ZKH.Blog.sln
+		SccProjectName7 = ZKH.Blog.UI.Portal
+		SccLocalPath7 = ZKH.Blog.UI.Portal
+		SccProjectUniqueName8 = ZKH.Blog.DalFactory\\ZKH.Blog.DalFactory.csproj
+		SccProjectTopLevelParentUniqueName8 = ZKH.Blog.sln
+		SccProjectName8 = ZKH.Blog.DalFactory
+		SccLocalPath8 = ZKH.Blog.DalFactory
+	EndGlobalSection
+EndGlobal

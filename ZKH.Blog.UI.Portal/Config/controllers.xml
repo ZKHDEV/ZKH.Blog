@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <object type="ZKH.Blog.UI.Portal.Controllers.Admin.AccountController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="adminInfoService" ref="AdminInfoService" />
+    <property name="adminInfoExtService" ref="AdminInfoExtService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="webInfoService" ref="WebInfoService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminUserController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="adminInfoService" ref="AdminInfoService" />
+    <property name="adminInfoExtService" ref="AdminInfoExtService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminPerMsgController, ZKH.Blog.UI.Portal" singleton="false" >
+  <property name="adminInfoService" ref="AdminInfoService" />
+  <property name="adminInfoExtService" ref="AdminInfoExtService" />
+</object>
+<object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminArticleController, ZKH.Blog.UI.Portal" singleton="false" >
+  <property name="articleInfoService" ref="ArticleInfoService" />
+  <property name="adminInfoExtService" ref="AdminInfoExtService" />
+  <property name="articleTypeService" ref="ArticleTypeService" />
+  <property name="commentInfoService" ref="CommentInfoService" />
+</object>
+<object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminWebController, ZKH.Blog.UI.Portal" singleton="false" >
+  <property name="webInfoService" ref="WebInfoService" />
+</object>
+<object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminPwdController, ZKH.Blog.UI.Portal" singleton="false" >
+  <property name="adminInfoService" ref="AdminInfoService" />
+</object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminAdvertisingController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="advertisingInfoService" ref="AdvertisingInfoService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Home.HomeController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="articleInfoService" ref="ArticleInfoService" />
+    <property name="webInfoService" ref="WebInfoService" />
+    <property name="advertisingInfoService" ref="AdvertisingInfoService" />
+    <property name="adminInfoExtService" ref="AdminInfoExtService" />
+    <property name="messageInfoService" ref="MessageInfoService" />
+    <property name="photoInfoService" ref="PhotoInfoService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Home.ArticleController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="articleTypeService" ref="ArticleTypeService" />
+    <property name="articleInfoService" ref="ArticleInfoService" />
+    <property name="webInfoService" ref="WebInfoService" />
+    <property name="advertisingInfoService" ref="AdvertisingInfoService" />
+    <property name="commentInfoService" ref="CommentInfoService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminCommentController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="articleInfoService" ref="ArticleInfoService" />
+    <property name="commentInfoService" ref="CommentInfoService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminMessageController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="messageInfoService" ref="MessageInfoService" />
+    <property name="replyInfoService" ref="ReplyInfoService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Admin.AdminPhotoController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="photoInfoService" ref="PhotoInfoService" />
+    <property name="photoTypeService" ref="PhotoTypeService" />
+  </object>
+  <object type="ZKH.Blog.UI.Portal.Controllers.Home.PhotoController, ZKH.Blog.UI.Portal" singleton="false" >
+    <property name="photoInfoService" ref="PhotoInfoService" />
+    <property name="photoTypeService" ref="PhotoTypeService" />
+    <property name="webInfoService" ref="WebInfoService" />
+    <property name="advertisingInfoService" ref="AdvertisingInfoService" />
+  </object>
+
+  <!--intentionally do NOT register the AccountController with the container; demonstrates that the underlying
+  default controller factory will properly (attempt to!) resolve all controllers not registered with Spring.NET
+  using its default controller resolution behavoir-->
+  <!--<object type="Spring.MvcQuickStart.Controllers.AccountController, Spring.MvcQuickStart" singleton="false" />-->
+</objects>

@@ -1,0 +1,8 @@
+﻿@using ZKH.Blog.Model
+@{
+    var advertising = (AdvertisingInfo)ViewBag.Advertising;
+}
+<div class="cell">  
+    <a href="@advertising.Link" target="_blank"><img src="@advertising.Url" alt="广告" /></a>
+</div>
+

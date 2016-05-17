@@ -1,0 +1,48 @@
+﻿@using ZKH.Blog.Model
+<div class="row">
+    <div style="padding:0px 10px">
+        <a href="/Photo/Index"><h3 class="fg-blue text-light margin5">图片墙<span class="mif-chevron-right mif-2x" style="vertical-align: top !important;"></span></h3></a>
+        <div class="tile-group no-margin no-padding" style="width: 100%;">
+            @{
+                Random random = new Random(Guid.NewGuid().GetHashCode());
+                int i = 0;
+                List<PhotoInfo> photos = (List<PhotoInfo>)ViewBag.Photos;
+                foreach (var photo in photos.Take(10))
+                {
+                    i = random.Next(3);
+                    if (i == 2)
+                    {
+                        <a href="/Photo/Detail/@photo.Id">
+                            <div class="tile-large ol-transparent" data-role="tile">
+                                <div class="tile-content">
+                                    <img src="@photo.Url" data-role="fitImage" data-format='square'>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                    if (i == 1)
+                    {
+                        <a href="/Photo/Detail/@photo.Id">
+                            <div class="tile-wide ol-transparent" data-role="tile">
+                                <div class="tile-content">
+                                    <img src="@photo.Url" data-role="fitImage" data-format='square'>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                    if (i == 0)
+                    {
+                        <a href="/Photo/Detail/@photo.Id">
+                            <div class="tile ol-transparent" data-role="tile">
+                                <div class="tile-content">
+                                    <img src="@photo.Url" data-role="fitImage" data-format='square'>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+            }
+
+        </div>
+    </div>
+</div>

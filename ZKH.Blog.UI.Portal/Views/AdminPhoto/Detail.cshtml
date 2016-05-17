@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+@model ZKH.Blog.Model.PhotoInfo
+
+<div class="container padding20 bg-white" style="width:550px">
+    <div style="text-align:center">
+        <h3>@Model.Title</h3><br />
+        <p style="font-size:small">@Model.SubTime</p>
+    </div>
+    <hr /><br />
+    <p><img src="@Model.Url" style="width:auto" /></p>
+    <hr /><br />
+    <div class="example" data-text="描述" style="word-break:normal;word-wrap:break-word" >
+        @Model.Remark
+        <br /><br />
+    </div>
+</div>

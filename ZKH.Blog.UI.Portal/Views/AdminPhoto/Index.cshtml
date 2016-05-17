@@ -1,0 +1,166 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "相册管理";
+}
+@using ZKH.Blog.Model
+<div class="padding20 bg-white">
+    <h1 class="text-light">相册管理<span class="mif-images place-right"></span></h1>
+    <hr class="thin bg-grayLighter">
+    <button class="button primary" onclick="showDialog('createdialog')"><span class="mif-plus"></span> 添加相册</button>
+    <button class="button success" onclick="update()"> 修改</button>
+    <button class="button alert" onclick="confirmdel()"> 删除</button>
+    <hr class="thin bg-grayLighter">
+    <table class="dataTable border bordered" data-role="datatable" data-auto-width="false">
+        <thead>
+            <tr>
+                <td style="width: 20px"></td>
+                <td class="sortable-column" style="width: 100px">ID</td>
+                <td class="sortable-column">相册名称</td>
+                <td class="sortable-column">描述</td>
+                <td class="sortable-column">相片数</td>
+                <td class="sortable-column">创建时间</td>
+                <td class="sortable-column"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PhotoType photoType in ViewBag.Types)
+            {
+                <tr>
+                    <td>
+                        <label class="input-control checkbox small-check no-margin">
+                            <input type="checkbox" class="cbox" value="@photoType.Id">
+                            <span class="check"></span>
+                        </label>
+                    </td>
+                    <td>@photoType.Id</td>
+                    <td>@photoType.Type</td>
+                    <td>@photoType.Remark</td>
+                    <td>@photoType.PhotoInfo.Where(a => a.DelFlag == (short)0).Count()</td>
+                    <td>@photoType.ModifiedOn</td>
+                    <td><a href="/AdminPhoto/Category/@photoType.Id">查看</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div data-role="dialog,draggable" id="createdialog" class="padding20" data-overlay="true" data-close-button="true" data-overlay-color="op-dark" data-overlay-click-close="true">
+    <div class="example" data-text="添加相册">
+        @using (Ajax.BeginForm("CreateType", "AdminPhoto", new AjaxOptions() { OnSuccess = "afterCreate" }))
+        {
+            @Html.AntiForgeryToken()
+            <label>相册名称</label>
+            <input class="input-control full-size required" style="border-style:solid" name="Type" />
+            <p id="errormsg"></p>
+            <label>描述</label>
+            <div class="input-control textarea full-size">
+                <textarea name="Remark"></textarea>
+            </div>
+            <input class="primary" type="submit" value="确定" />
+        }
+    </div>
+</div>
+<div data-role="dialog,draggable" id="updatedialog" class="padding20" data-overlay="true" data-close-button="true" data-overlay-color="op-dark" data-overlay-click-close="true">
+    <iframe id="updateform" width="500px" height="250px" frameborder="0"></iframe>
+</div>
+<style type="text/css">
+    label.error {
+        color: red;
+    }
+    .field-validation-error {
+        color: red;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("form").validate({
+            messages: {
+                Type: { required: "*必填" }
+            },
+            errorPlacement: function (error, element) {
+                error.appendTo($("#errormsg"));
+            }
+        });
+    });
+
+    function showDialog(id) {
+        var dialog = $("#" + id).data('dialog');
+        if (!dialog.element.data('opened')) {
+            dialog.open();
+        } else {
+            dialog.close();
+        }
+    }
+
+    function confirmdel() {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            del();
+        }
+    }
+
+    function del() {
+        var allbox = $(".cbox");
+        var selected = "";
+        for (var i = 0; i < allbox.length; i++) {
+            if (allbox[i].checked) {
+                selected = selected + allbox[i].value + ",";
+            }
+        }
+        if (selected === "") {
+            alert("请选择删除对象 !");
+            return;
+        }
+        $.post("DeleteType", { "ids": selected }, function (data) {
+            if (data === "ok") {
+                alert("删除成功 !");
+                gotomain();
+            }
+            else {
+                alert("删除失败 !");
+            }
+        });
+    }
+
+    function getallcheck() {
+        var allbox = $(".cbox");
+        if (allbox.length != 0) {
+            var selectbox = null;
+            var num = 0;
+            for (var i = 0; i < allbox.length; i++) {
+                if (allbox[i].checked) {
+                    num = num + 1;
+                    selectbox = allbox[i];
+                }
+            }
+            if (num == 0) {
+                return { Num: 0 };
+            }
+            return { Num: num, SelectBox: selectbox.value };
+        } else {
+            return { Num: 0 };
+        }
+    }
+
+    function update() {
+        var allcheck = getallcheck();
+        if (allcheck.Num === 1) {
+            $("#updateform").attr("src", "/AdminPhoto/UpdateType/" + allcheck.SelectBox);
+            showDialog('updatedialog');
+            return;
+        }
+        alert("请选择一个修改对象 !");
+    }
+
+    function afterCreate(data) {
+        var msg = data.split(':');
+        alert(msg[1]);
+        if (msg[0] === "ok") {
+            gotomain();
+        } 
+    }
+
+    function gotomain() {
+        window.location.href = "/AdminPhoto/Index";
+    }
+
+</script>

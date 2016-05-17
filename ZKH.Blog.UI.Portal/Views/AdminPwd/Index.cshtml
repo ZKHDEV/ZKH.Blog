@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "修改密码";
+}
+
+<script src="~/Scripts/MyAjaxForm.js"></script>
+
+<div class="container padding20 bg-white" style="margin-left:50px;padding-right:300px">
+    <p><h1 style="font-weight:300">修改密码</h1></p><br />
+    <!--enctype="multipart/form-data" 验证上传文件的正确编码-->
+    <form id="form" enctype="multipart/form-data" action="Update" data-ajax-success="afterSubmit" data-ajax="true" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+        @Html.AntiForgeryToken()
+        <div class="grid">
+            <div class="row">
+                <div class="cell">
+                    <label>原密码</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="password" data-validate-func="required" data-validate-hint="不能为空" name="oldPwd">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>新密码</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="password" data-validate-func="required" data-validate-hint="不能为空" name="newPwd">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>重新输入密码</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="password" data-validate-func="required" data-validate-hint="不能为空" name="SecPwd">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <div class="padding20 no-padding-right no-padding-left no-padding-top">
+                        <input type="submit" value="完成" class="button info block-shadow-info text-shadow" />
+                        <input type="reset" value="重置" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    function afterSubmit(data) {
+        var str = data.split(':');
+        alert(str[1]);
+        if (str[0] == "ok") {
+            gotomain();
+        }
+    }
+
+    function gotomain() {
+        window.location.href = "/Admin/Menu";
+    }
+
+</script>

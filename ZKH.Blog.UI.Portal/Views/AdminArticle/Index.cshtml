@@ -1,0 +1,191 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "文章管理";
+}
+@using ZKH.Blog.Model
+
+<div class="padding20 bg-white">
+    <h1 class="text-light">文章管理<span class="mif-file-text place-right"></span></h1>
+    <hr class="thin bg-grayLighter">
+    <button class="button primary" onclick="create()"><span class="mif-plus"></span> 添加</button>
+    <button class="button success" onclick="update()"> 修改</button>
+    <button class="button alert" onclick="confirmdel()"> 删除</button>
+    <button class="button primary" onclick="showDialog('typedialog')"> 管理类别</button>
+    <hr class="thin bg-grayLighter">
+    <table class="dataTable border bordered" data-role="datatable" data-auto-width="false">
+        <thead>
+            <tr>
+                <td style="width: 20px"></td>
+                <td class="sortable-column" style="width: 100px">ID</td>
+                <td class="sortable-column">标题</td>
+                <td class="sortable-column">类型</td>
+                <td class="sortable-column">修改时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var articleinfo in (List<ArticleInfo>)ViewData["articles"])
+            {
+                List<ArticleType> TypeList = (List<ArticleType>)ViewData["types"];
+                string type = TypeList.Where(a => a.Id == articleinfo.ArticleTypeId).Select(a => a.Type).FirstOrDefault();
+                <tr>
+                    <td>
+                        <label class="input-control checkbox small-check no-margin">
+                            <input type="checkbox" class="cbox" value="@articleinfo.Id">
+                            <span class="check"></span>
+                        </label>
+                    </td>
+                    <td>@articleinfo.Id</td>
+                    <td><a href="/AdminArticle/Detail/@articleinfo.Id">@articleinfo.Title</a></td>
+                    <td>@type</td>
+                    <td>@articleinfo.ModifiedOn</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div data-role="dialog,draggable" id="typedialog" class="padding20" data-overlay="true" data-close-button="true" data-overlay-color="op-dark" data-overlay-click-close="true">
+    <div class="example" style="height:400px;overflow:auto" data-text="管理类别">
+        <div class="grid">
+            <div class="row">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>类别名</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var type in (List<ArticleType>)ViewData["types"])
+                        {
+                            <tr>
+                                <td>@type.Type</td>
+                                <td><input type="button" value="删除" onclick="confirmdeltype(@type.Id)" /></td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="2">
+                                <form id="form" action="/AdminArticle/CreType" data-ajax-success="afterSubmit" data-ajax="true" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+                                    <div class="row cells2">
+                                        <div class="cell">
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Type">
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                            </div>
+                                        </div>
+                                        <div class="cell">
+                                            <input type="submit" value="添加" class="button info block-shadow-info text-shadow" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function showDialog(id) {
+        var dialog = $("#" + id).data('dialog');
+        if (!dialog.element.data('opened')) {
+            dialog.open();
+        } else {
+            dialog.close();
+        }
+    }
+
+    function create() {
+        window.location.href = "/AdminArticle/Create";
+    }
+
+    function confirmdel() {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            del();
+        }
+    }
+
+    function del() {
+        var allbox = $(".cbox");
+        var selected = "";
+        for (var i = 0; i < allbox.length; i++) {
+            if (allbox[i].checked) {
+                selected = selected + allbox[i].value + ",";
+            }
+        }
+        if (selected == "") {
+            alert("请选择删除对象 !");
+            return;
+        }
+        $.post("/AdminArticle/Delete", { "ids": selected }, function (data) {
+            if (data == "ok") {
+                alert("删除成功 !");
+                gotomain();
+            }
+            else {
+                alert("删除失败 !");
+            }
+        });
+    }
+
+    function getallcheck() {
+        var allbox = $(".cbox");
+        if (allbox.length != 0) {
+            var selectbox = null;
+            var num = 0;
+            for (var i = 0; i < allbox.length; i++) {
+                if (allbox[i].checked) {
+                    num = num + 1;
+                    selectbox = allbox[i];
+                }
+            }
+            if (num == 0) {
+                return { Num: 0 };
+            }
+            return { Num: num, SelectBox: selectbox.value };
+        } else {
+            return { Num: 0 };
+        }
+    }
+
+    function update() {
+        var allcheck = getallcheck();
+        if (allcheck.Num == 1) {
+            window.location.href = "/AdminArticle/Update/" + allcheck.SelectBox;
+            return;
+        }
+        alert("请选择一个修改对象 !");
+    }
+
+    function deltype(id) {
+        $.post("/AdminArticle/DelType", { "id": id }, function (data) {
+            if (data == "no") {
+                alert("删除失败 ！");
+                return;
+            }
+            gotomain();
+        });
+    }
+
+    function afterSubmit(data) {
+        if (data == "ok") {
+            gotomain();
+        } else if (data == "no1") {
+            alert("该类别名已存在 ！");
+        }
+    }
+
+    function confirmdeltype(id) {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            deltype(id);
+        }
+    }
+
+    function gotomain() {
+        window.location.href = "/AdminArticle/Index";
+    }
+
+</script>

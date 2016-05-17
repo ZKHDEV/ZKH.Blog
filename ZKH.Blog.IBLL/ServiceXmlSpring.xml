@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+    <object name="AdminInfoDal" type="ZKH.Blog.DAL.AdminInfoDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="AdminInfoExtDal" type="ZKH.Blog.DAL.AdminInfoExtDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="AdvertisingInfoDal" type="ZKH.Blog.DAL.AdvertisingInfoDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="ArticleInfoDal" type="ZKH.Blog.DAL.ArticleInfoDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="ArticleTypeDal" type="ZKH.Blog.DAL.ArticleTypeDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="CommentInfoDal" type="ZKH.Blog.DAL.CommentInfoDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="MessageInfoDal" type="ZKH.Blog.DAL.MessageInfoDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="PhotoInfoDal" type="ZKH.Blog.DAL.PhotoInfoDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="PhotoTypeDal" type="ZKH.Blog.DAL.PhotoTypeDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="ReplyInfoDal" type="ZKH.Blog.DAL.ReplyInfoDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+    <object name="WebInfoDal" type="ZKH.Blog.DAL.WebInfoDal, ZKH.Blog.DAL" singleton="false" >
+  </object>
+</objects>

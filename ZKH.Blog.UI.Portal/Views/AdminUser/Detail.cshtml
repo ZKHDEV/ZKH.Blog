@@ -1,0 +1,134 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+@model ZKH.Blog.Model.AdminInfoExt
+<div class="grid">
+    <div class="row">
+        <div class="cell">
+            <div class="example">
+                <div class="grid">
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>姓名：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Name</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>性别：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Sex</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>年龄：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Age</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>现居地：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Country@Model.BeAware@Model.City</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>民族：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Folk</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>文化程度：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Kultur</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>职业：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Business</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>毕业学校：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.School</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>专业：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Speciality</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>邮箱：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Email</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>手机：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Phone</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>QQ：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.QQ</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>修改时间：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.ModifiedOn</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>注册时间：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.SubTime</h4>
+                        </div>
+                    </div>
+                    <div class="row cells2">
+                        <div class="cell">
+                            <h4>备注：</h4>
+                        </div>
+                        <div class="cell">
+                            <h4>@Model.Remark</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

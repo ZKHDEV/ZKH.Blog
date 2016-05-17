@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Pwd" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="IsSuperUser" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminInfoExt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sex" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Age" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Folk" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Kultur" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Business" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="QQ" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="School" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Speciality" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BeAware" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="AdminInfoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdvertisingInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Signer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Company" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="ArticleTypeId" Type="int" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar(max)" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CommentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="ArticleInfoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MessageInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sex" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="PhotoTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReplyInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MessageInfoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Vedio" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ArticleTypeArticleInfo">
+          <End Role="ArticleType" Type="Self.ArticleType" Multiplicity="1" />
+          <End Role="ArticleInfo" Type="Self.ArticleInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArticleInfo">
+              <PropertyRef Name="ArticleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommentInfoArticleInfo">
+          <End Role="ArticleInfo" Type="Self.ArticleInfo" Multiplicity="1" />
+          <End Role="CommentInfo" Type="Self.CommentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommentInfo">
+              <PropertyRef Name="ArticleInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MessageInfoReplyInfo">
+          <End Role="MessageInfo" Type="Self.MessageInfo" Multiplicity="1" />
+          <End Role="ReplyInfo" Type="Self.ReplyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MessageInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReplyInfo">
+              <PropertyRef Name="MessageInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoInfoPhotoType">
+          <End Role="PhotoType" Type="Self.PhotoType" Multiplicity="1" />
+          <End Role="PhotoInfo" Type="Self.PhotoInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoInfo">
+              <PropertyRef Name="PhotoTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataModelStoreContainer">
+          <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminInfoExt" EntityType="Self.AdminInfoExt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdvertisingInfo" EntityType="Self.AdvertisingInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticleInfo" EntityType="Self.ArticleInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticleType" EntityType="Self.ArticleType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommentInfo" EntityType="Self.CommentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessageInfo" EntityType="Self.MessageInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoInfo" EntityType="Self.PhotoInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoType" EntityType="Self.PhotoType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplyInfo" EntityType="Self.ReplyInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebInfo" EntityType="Self.WebInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ArticleTypeArticleInfo" Association="Self.FK_ArticleTypeArticleInfo">
+            <End Role="ArticleType" EntitySet="ArticleType" />
+            <End Role="ArticleInfo" EntitySet="ArticleInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommentInfoArticleInfo" Association="Self.FK_CommentInfoArticleInfo">
+            <End Role="ArticleInfo" EntitySet="ArticleInfo" />
+            <End Role="CommentInfo" EntitySet="CommentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MessageInfoReplyInfo" Association="Self.FK_MessageInfoReplyInfo">
+            <End Role="MessageInfo" EntitySet="MessageInfo" />
+            <End Role="ReplyInfo" EntitySet="ReplyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoInfoPhotoType" Association="Self.FK_PhotoInfoPhotoType">
+            <End Role="PhotoType" EntitySet="PhotoType" />
+            <End Role="PhotoInfo" EntitySet="PhotoInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminInfo" EntityType="DataModel.AdminInfo" />
+          <EntitySet Name="AdminInfoExt" EntityType="DataModel.AdminInfoExt" />
+          <EntitySet Name="ArticleInfo" EntityType="DataModel.ArticleInfo" />
+          <EntitySet Name="ArticleType" EntityType="DataModel.ArticleType" />
+          <EntitySet Name="CommentInfo" EntityType="DataModel.CommentInfo" />
+          <EntitySet Name="PhotoInfo" EntityType="DataModel.PhotoInfo" />
+          <EntitySet Name="PhotoType" EntityType="DataModel.PhotoType" />
+          <EntitySet Name="MessageInfo" EntityType="DataModel.MessageInfo" />
+          <EntitySet Name="ReplyInfo" EntityType="DataModel.ReplyInfo" />
+          <EntitySet Name="WebInfo" EntityType="DataModel.WebInfo" />
+          <EntitySet Name="AdvertisingInfo" EntityType="DataModel.AdvertisingInfo" />
+          <AssociationSet Name="ArticleTypeArticleInfo" Association="DataModel.ArticleTypeArticleInfo">
+            <End Role="ArticleType" EntitySet="ArticleType" />
+            <End Role="ArticleInfo" EntitySet="ArticleInfo" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoInfoPhotoType" Association="DataModel.PhotoInfoPhotoType">
+            <End Role="PhotoInfo" EntitySet="PhotoInfo" />
+            <End Role="PhotoType" EntitySet="PhotoType" />
+          </AssociationSet>
+          <AssociationSet Name="CommentInfoArticleInfo" Association="DataModel.CommentInfoArticleInfo">
+            <End Role="CommentInfo" EntitySet="CommentInfo" />
+            <End Role="ArticleInfo" EntitySet="ArticleInfo" />
+          </AssociationSet>
+          <AssociationSet Name="MessageInfoReplyInfo" Association="DataModel.MessageInfoReplyInfo">
+            <End Role="MessageInfo" EntitySet="MessageInfo" />
+            <End Role="ReplyInfo" EntitySet="ReplyInfo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AdminInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Pwd" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsSuperUser" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminInfoExt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Folk" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Kultur" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Business" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="QQ" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="School" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Speciality" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BeAware" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AdminInfoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="ArticleTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CommentInfo" Relationship="DataModel.CommentInfoArticleInfo" FromRole="ArticleInfo" ToRole="CommentInfo" />
+          <Property Name="Summary" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ArticleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ArticleInfo" Relationship="DataModel.ArticleTypeArticleInfo" FromRole="ArticleType" ToRole="ArticleInfo" />
+        </EntityType>
+        <EntityType Name="CommentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ArticleInfoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PhotoTypeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PhotoInfo" Relationship="DataModel.PhotoInfoPhotoType" FromRole="PhotoType" ToRole="PhotoInfo" />
+        </EntityType>
+        <EntityType Name="MessageInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ReplyInfo" Relationship="DataModel.MessageInfoReplyInfo" FromRole="MessageInfo" ToRole="ReplyInfo" />
+        </EntityType>
+        <EntityType Name="ReplyInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="MessageInfoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Vedio" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Logo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="AdvertisingInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Signer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="ArticleTypeArticleInfo">
+          <End Type="DataModel.ArticleType" Role="ArticleType" Multiplicity="1" />
+          <End Type="DataModel.ArticleInfo" Role="ArticleInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArticleInfo">
+              <PropertyRef Name="ArticleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PhotoInfoPhotoType">
+          <End Type="DataModel.PhotoInfo" Role="PhotoInfo" Multiplicity="*" />
+          <End Type="DataModel.PhotoType" Role="PhotoType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoInfo">
+              <PropertyRef Name="PhotoTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CommentInfoArticleInfo">
+          <End Type="DataModel.CommentInfo" Role="CommentInfo" Multiplicity="*" />
+          <End Type="DataModel.ArticleInfo" Role="ArticleInfo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommentInfo">
+              <PropertyRef Name="ArticleInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageInfoReplyInfo">
+          <End Type="DataModel.MessageInfo" Role="MessageInfo" Multiplicity="1" />
+          <End Type="DataModel.ReplyInfo" Role="ReplyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MessageInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReplyInfo">
+              <PropertyRef Name="MessageInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelContainer">
+    <EntitySetMapping Name="AdminInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.AdminInfo)">
+        <MappingFragment StoreEntitySet="AdminInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UName" ColumnName="UName" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="IsSuperUser" ColumnName="IsSuperUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminInfoExt">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.AdminInfoExt)">
+        <MappingFragment StoreEntitySet="AdminInfoExt">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Folk" ColumnName="Folk" />
+          <ScalarProperty Name="Kultur" ColumnName="Kultur" />
+          <ScalarProperty Name="Business" ColumnName="Business" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="QQ" ColumnName="QQ" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="School" ColumnName="School" />
+          <ScalarProperty Name="Speciality" ColumnName="Speciality" />
+          <ScalarProperty Name="BeAware" ColumnName="BeAware" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AdminInfoId" ColumnName="AdminInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.ArticleInfo)">
+        <MappingFragment StoreEntitySet="ArticleInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="ArticleTypeId" ColumnName="ArticleTypeId" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleType">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.ArticleType)">
+        <MappingFragment StoreEntitySet="ArticleType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommentInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.CommentInfo)">
+        <MappingFragment StoreEntitySet="CommentInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ArticleInfoId" ColumnName="ArticleInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.PhotoInfo)">
+        <MappingFragment StoreEntitySet="PhotoInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="PhotoTypeId" ColumnName="PhotoTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoType">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.PhotoType)">
+        <MappingFragment StoreEntitySet="PhotoType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.MessageInfo)">
+        <MappingFragment StoreEntitySet="MessageInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReplyInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.ReplyInfo)">
+        <MappingFragment StoreEntitySet="ReplyInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MessageInfoId" ColumnName="MessageInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.WebInfo)">
+        <MappingFragment StoreEntitySet="WebInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Vedio" ColumnName="Vedio" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdvertisingInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.AdvertisingInfo)">
+        <MappingFragment StoreEntitySet="AdvertisingInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Signer" ColumnName="Signer" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

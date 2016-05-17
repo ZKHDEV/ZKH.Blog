@@ -1,0 +1,213 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "网站信息";
+}
+@model ZKH.Blog.Model.WebInfo
+
+<script src="~/Scripts/MyAjaxForm.js"></script>
+
+<div class="container padding20 bg-white" style="margin-left:10px">
+    <p><h1 style="font-weight:300">网站信息</h1></p><br />
+    <!--enctype="multipart/form-data" 验证上传文件的正确编码-->
+    <form id="form" enctype="multipart/form-data" action="Update" data-ajax-success="afterSubmit" data-ajax="true" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="SubTime" value="@Model.SubTime" />
+        <div class="grid">
+            <div class="row">
+                <div class="cell">
+                    <label>网站名称</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Name" value="@Model.Name">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>创建者</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Creator" value="@Model.Creator">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>联系电话</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="number" data-validate-hint="格式不正确" name="Phone" value="@Model.Phone">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>邮箱</label><br />
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="email" data-validate-hint="格式不正确" name="Email" value="@Model.Email">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>所在地</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Address" value="@Model.Address">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>网站链接</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" data-validate-func="required" data-validate-hint="不能为空" name="Link" value="@Model.Link">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row cells2">
+                <div class="cell">
+                    <label>网站Logo</label>
+                    <input type="hidden" name="Logo" id="logo" value="@Model.Logo" />
+                    <div class="input-control file full-size" data-role="input">
+                        <input type="file"  id="logoinput" accept="image/jpeg,image/gif,image/png" name="logoFile" onchange="uploadlogo(this)">
+                        <button class="button"><span class="mif-folder"></span></button>
+                    </div>
+                    <label>图片需小于20MB，支持格式：.jpg , .png , .gif , .ico</label>
+                </div>
+                <div class="cell" id="logoDiv" style="padding:0px 100px">
+                    <img id='logoimg' src='@Model.Logo' />
+                </div>
+            </div>
+            <div class="row cells2">
+                <div class="cell">
+                    <label>管理员头像</label>
+                    <input type="hidden" name="Photo" id="photo" value="@Model.Photo" />
+                    <div class="input-control file full-size" data-role="input">
+                        <input type="file" id="photoinput" accept="image/jpeg,image/gif,image/png" name="photoFile" onchange="uploadphoto(this)">
+                        <button class="button"><span class="mif-folder"></span></button>
+                    </div>
+                    <label>图片需小于20MB，支持格式：.jpg , .png , .gif , .ico</label>
+                </div>
+                <div class="cell" id="photoDiv" style="padding:0px 100px">
+                    <img id='headimg' src='@Model.Photo' data-role='fitImage' data-format='cycle' />
+                </div>
+            </div>
+            <div class="row cells2">
+                <div class="cell">
+                    <label>主页视频</label>
+                    <input type="hidden" name="Vedio" id="vedio" value="@Model.Vedio" />
+                    <div class="input-control file full-size" data-role="input">
+                        <input type="file" id="vedioinput" accept="vedio/mp4" name="vedioFile" onchange="uploadvedio(this)">
+                        <button class="button"><span class="mif-folder"></span></button>
+                    </div>
+                    <label>视频需小于50MB，支持格式：.mp4 , .wmv , .flv , .rm , .swf , .rmvb</label>
+                </div>
+                <div class="cell" id="vedioDiv">
+                    <div class='video-container'><iframe src='@Model.Vedio' frameborder='0' allowfullscreen></iframe></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <div class="padding20 no-padding-right no-padding-left no-padding-top">
+                        <input type="submit" value="完成" class="button info block-shadow-info text-shadow" />
+                        <input type="reset" value="重置" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function afterSubmit(data) {
+        alert(data);
+    }
+
+    function checkupload(target, type) {
+        var filepath = target.value;
+        if (filepath === null) {
+            return false;
+        }
+        var ext = filepath.substring(filepath.lastIndexOf("."));
+        var allowext = null;
+        var allowsize = 0;
+        if (type === "img") {
+            allowext = [".jpeg", ".jpg", ".png", ".gif", ".ico"];
+            allowsize = 20000000;
+        } else {
+            allowext = [".mp4", ".wmv", ".flv", ".rm", ".swf", ".rmvb"];
+            allowsize = 50000000;
+        }
+        for (var i = 0; i < allowext.length; i++) {
+            if (allowext[i] === ext) {
+                break;
+            }
+        }
+        if (i === allowext.length) {
+            alert("不支持该格式 !");
+            return false;
+        }
+        var size = target.files[0].size;
+        if (size > allowsize) {
+            alert("所选文件过大 !");
+            return false;
+        }
+        return true;
+    }
+
+    function uploadlogo(target) {
+        if (checkupload(target, "img")) {
+            $("#form").ajaxSubmit({
+                url: "/AdminWeb/UploadLogo",
+                type: "Post",
+                success: function (data) {
+                    var str = data.split(':');
+                    if (str[0] == "ok") {
+                        $("#logo").val(str[1]);
+                        $("#logoDiv").html("<img id='logoimg' src='" + str[1] + "' data-role='fitImage' />");
+                    } else {
+                        alert(str[1]);
+                    }
+                }
+            });
+        }     
+    }
+
+    function uploadphoto(target) {
+        if (checkupload(target, "img")) {
+            $("#form").ajaxSubmit({
+                url: "/AdminWeb/UploadPhoto",
+                type: "Post",
+                success: function (data) {
+                    var str = data.split(':');
+                    if (str[0] == "ok") {
+                        $("#photo").val(str[1]);
+                        $("#photoDiv").html("<img id='headimg' src='" + str[1] + "' data-role='fitImage' data-format='cycle' />");
+                    } else {
+                        alert(str[1]);
+                    }
+                }
+            });
+        }       
+    }
+
+    function uploadvedio(target) {
+        if (checkupload(target, "vedio")) {
+            $("#form").ajaxSubmit({
+                url: "/AdminWeb/UploadVedio",
+                type: "Post",
+                success: function (data) {
+                    var str = data.split(':');
+                    if (str[0] == "ok") {
+                        $("#vedio").val(str[1]);
+                        $("#vedioDiv").html("<div class='video-container'><iframe src='" + str[1] + "' frameborder='0'  allowfullscreen></iframe></div>");
+                    } else {
+                        alert(str[1]);
+                    }
+                }
+            });
+        }      
+    }
+</script>

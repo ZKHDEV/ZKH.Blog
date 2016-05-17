@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+@model ZKH.Blog.Model.AdminInfo
+
+<script src="~/Scripts/MyAjaxForm.js"></script>
+
+<div class="example" data-text="修改用户">
+    @using (Ajax.BeginForm(new AjaxOptions() { OnSuccess = "afterupdate" }))
+            {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DelFlag)
+        @Html.HiddenFor(model => model.SubTime)
+        @Html.HiddenFor(model => model.UName)
+        @Html.HiddenFor(model => model.Pwd)
+        <br />
+        <div class="cell">
+            <label>是否为超级用户</label>
+            <label class="switch">
+                @Html.CheckBoxFor(model => model.IsSuperUser, new { htmlAttributes = new { @class = "form-control" } })
+                &nbsp;&nbsp;
+                <span class="check"></span>
+            </label>
+        </div>
+                <br />
+                <div class="cell">
+                    <label>修改备注</label>
+                    <div class="input-control text full-size">
+                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="padding20 no-padding-right no-padding-left no-padding-top">
+                        <input type="submit" value="完成" class="button info block-shadow-info text-shadow" />
+                        <input type="reset" value="重置" />
+                        <input type="button" value="取消" onclick="closedialog()" id="cancelBtn" />
+                    </div>
+                </div>
+    }
+</div>
+<script type="text/javascript">
+
+    function afterupdate(data) {
+        if (data == "ok") {
+            intiwindow();
+        }
+    }
+
+    function closedialog() {
+        window.parent.window.closeeditwindow();
+    }
+
+    function intiwindow() {
+        window.parent.window.initwindow();
+    }
+
+</script>

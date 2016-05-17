@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "评论管理";
+}
+@using ZKH.Blog.Model
+
+<div class="padding20 bg-white">
+    <h1 class="text-light">评论管理<span class="mif-file-text place-right"></span></h1>
+    <hr class="thin bg-grayLighter">
+    <button class="button alert" onclick="confirmdel()"> 删除</button>
+    <hr class="thin bg-grayLighter">
+    <table class="dataTable border bordered" data-role="datatable" data-auto-width="false">
+        <thead>
+            <tr>
+                <td style="width: 20px"></td>
+                <td class="sortable-column" style="width: 100px">ID</td>
+                <td class="sortable-column">内容</td>
+                <td class="sortable-column">评论人</td>
+                <td class="sortable-column">评论文章</td>
+                <td class="sortable-column">评论时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var articles = (List<ArticleInfo>)ViewData["articles"];
+            }
+            @foreach (var commentinfo in (List<CommentInfo>)ViewData["coms"])
+            {
+                <tr>
+                    <td>
+                        <label class="input-control checkbox small-check no-margin">
+                            <input type="checkbox" class="cbox" value="@commentinfo.Id">
+                            <span class="check"></span>
+                        </label>
+                    </td>
+                    <td>@commentinfo.Id</td>
+                    <td>@commentinfo.Content</td>
+                    <td>@commentinfo.Name</td>
+                    <td>@articles.Where(a => a.Id == commentinfo.ArticleInfoId).FirstOrDefault().Title</td>
+                    <td>@commentinfo.SubTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+
+    function confirmdel() {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            del();
+        }
+    }
+
+    function del() {
+        var allbox = $(".cbox");
+        var selected = "";
+        for (var i = 0; i < allbox.length; i++) {
+            if (allbox[i].checked) {
+                selected = selected + allbox[i].value + ",";
+            }
+        }
+        if (selected == "") {
+            alert("请选择删除对象 !");
+            return;
+        }
+        $.post("Delete", { "ids": selected }, function (data) {
+            if (data == "ok") {
+                alert("删除成功 !");
+                gotomain();
+            }
+            else {
+                alert("删除失败 !");
+            }
+        });
+    }
+
+    function confirmdel() {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            del();
+        }
+    }
+
+    function gotomain() {
+        window.location.href = "/AdminComment/Index";
+    }
+
+</script>

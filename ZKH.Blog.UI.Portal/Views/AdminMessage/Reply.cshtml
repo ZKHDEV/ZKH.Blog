@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+@using ZKH.Blog.Model
+
+<script src="~/Scripts/MyAjaxForm.js"></script>
+
+<div class="example" data-text="回复">
+    @using (Ajax.BeginForm(new AjaxOptions() { OnSuccess = "afterreply" }))
+            {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="MessageInfoId" value="@ViewData["msgId"]" />
+        <div class="input-control textarea full-size">
+            <textarea name="Content" id="content"></textarea>
+        </div>
+                    <input class="primary full-size" type="submit" value="提交" /><br /><hr /><br />
+    }
+    <div id="replyDiv">
+        @foreach (ReplyInfo replyInfo in (List<ReplyInfo>)ViewData["replyList"])
+        {
+            <div class="example">
+                <blockquote>
+                    <p>@replyInfo.Content</p>
+                    <small>@replyInfo.SubTime &nbsp;&nbsp;&nbsp; <a href="javascript:void(0)" onclick="confirmdel(@replyInfo.Id)">删除</a></small>
+                </blockquote>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+
+    function afterreply(data) {
+        if (data.result == "ok") {
+            var replydiv = $("<div class='example'><blockquote><p>" + data.reply.Content + "</p><small>" + data.reply.Name + " &nbsp;&nbsp;&nbsp; 刚刚</small></blockquote></div>");
+            $("#replyDiv").prepend(replydiv);
+        } else {
+            alert("回复失败，请重试 ！");
+        }
+    }
+
+    function closedialog() {
+        window.parent.window.closeeditwindow();
+    }
+
+    function intiwindow() {
+        window.parent.window.initwindow();
+    }
+
+    function confirmdel(id) {
+        var r = confirm("确定要删除吗？");
+        if (r) {
+            del(id);
+        }
+    }
+
+    function del(id) {
+        $.post("/AdminMessage/DelRep", { "id": id }, function (msg) {
+            if (msg == "ok") {
+                window.location.href = "/AdminMessage/Reply/@ViewData["msgId"]";
+            }
+            else {
+                alert("删除失败 !");
+            }
+        });
+    }
+
+</script>

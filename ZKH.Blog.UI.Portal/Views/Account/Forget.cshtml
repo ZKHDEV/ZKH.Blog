@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "重置密码";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+        changevcode();
+        $("#vimg").click(changevcode);
+        $("#vcode").click(changevcode);
+    })
+    function chechIn() {
+        if ($("#email").val() === null || $("#vcode").val() === null) {
+            changevcode();
+            alert("邮箱和验证码不能为空 ！");
+            return false;
+        }
+        return true;
+    }
+    function afterSub(data) {
+        var msg = data.split(':');
+        alert(msg[1]);
+        if (msg[0] === "ok") {
+            window.location.href = "/Account/Login";
+        }
+        changevcode();
+    }
+    function changevcode() {
+        var url = "/Account/GetValidateCode?id=1";
+        var date = new Date();
+        var str = url + date.getDay() + date.getSeconds() + date.getMinutes();
+        $("#vimg").attr("src", str);
+    }
+</script>
+
+<div class="container padding20" style="padding-right:300px">
+    <p><a href="/Admin/Index"><h4 class="text-bold" style="color:grey">ZKH.Blog</h4></a></p><br />
+    <p><h1 style="font-weight:300">重置密码</h1></p><br /><br />
+    @using (Ajax.BeginForm("Forget", "Account", new AjaxOptions() { OnSuccess="afterSub"}, new { @autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="grid">
+            <div class="row">
+                <div class="cell">
+                    <label>账户安全邮箱</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" name="Email" id="email"/>
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <label>验证码</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" name="vCode">
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    </div>
+                    <div class="form-actions" style="vertical-align:central">
+                        <img id="vimg" style="float: left; height: 30px;margin-top:5px" />
+                        <button type="button" class="button link" id="vcode">看不清，换一张</button>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+            </div>         
+            <div class="row">
+                <div class="cell">
+                    <div class="padding20 no-padding-right no-padding-left no-padding-top">
+                        <input type="submit" value="确定" onclick="chechIn()" class="button info block-shadow-info text-shadow" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
